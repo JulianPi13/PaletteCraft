@@ -1,27 +1,73 @@
-function ColorCard({ color }) {
+import toast from "react-hot-toast";
+
+function ColorCard({ color, onToggleLock }) {
+
+  async function copyColor() {
+
+    await navigator.clipboard.writeText(color.hex);
+
+    toast.success(`${color.hex} copied!`);
+
+  }
+
   return (
-    <div className="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 transition duration-300 hover:-translate-y-2 hover:border-indigo-500 hover:shadow-2xl hover:shadow-indigo-500/20">
+
+    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 transition-all duration-300 hover:-translate-y-2 hover:border-indigo-500 hover:shadow-xl">
 
       <div
-        className="h-40 w-full"
-        style={{ backgroundColor: color }}
+
+        className="h-40"
+
+        style={{
+          backgroundColor: color.hex,
+        }}
+
       />
 
       <div className="p-5">
 
-        <h3 className="font-bold text-lg">
-          {color}
-        </h3>
+        <h2 className="font-bold text-lg">
 
-        <button
-          className="mt-4 w-full rounded-lg bg-indigo-500 py-2 font-semibold transition hover:bg-indigo-600"
-        >
-          Copy
-        </button>
+          {color.hex}
+
+        </h2>
+
+        <div className="mt-5 flex gap-3">
+
+          <button
+
+            onClick={copyColor}
+
+            className="flex-1 rounded-xl bg-indigo-500 py-2 hover:bg-indigo-600 transition"
+
+          >
+
+            📋 Copy
+
+          </button>
+
+          <button
+
+            onClick={() => onToggleLock(color.id)}
+
+            className={`w-14 rounded-xl transition ${
+              color.locked
+                ? "bg-red-500"
+                : "bg-slate-700 hover:bg-slate-600"
+            }`}
+
+          >
+
+            {color.locked ? "🔒" : "🔓"}
+
+          </button>
+
+        </div>
 
       </div>
 
     </div>
+
   );
 }
 
