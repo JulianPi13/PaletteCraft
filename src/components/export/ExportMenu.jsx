@@ -61,14 +61,14 @@ ${palette
 
       <button
         onClick={exportJSON}
-        className="rounded-xl bg-indigo-500 px-4 py-2 transition hover:bg-indigo-600"
+        className="rounded-xl bg-slate-800 px-4 py-2 transition hover:bg-slate-700"
       >
         📦 JSON
       </button>
 
       <button
         onClick={exportTailwind}
-        className="rounded-xl bg-emerald-600 px-4 py-2 transition hover:bg-emerald-700"
+        className="rounded-xl bg-slate-800 px-4 py-2 transition hover:bg-slate-700"
       >
         🎨 Tailwind
       </button>

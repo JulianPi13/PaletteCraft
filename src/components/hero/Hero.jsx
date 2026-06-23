@@ -2,6 +2,13 @@ import { motion } from "framer-motion";
 import Button from "../ui/Button";
 
 function Hero() {
+  function scrollToGenerator() {
+    document.getElementById("generator")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
   return (
     <section className="relative mx-auto flex min-h-[70vh] max-w-7xl flex-col items-center justify-center px-8 text-center">
 
@@ -16,7 +23,7 @@ function Hero() {
       <motion.h1
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: .7 }}
+        transition={{ duration: 0.7 }}
         className="max-w-5xl text-6xl font-black leading-tight md:text-7xl"
       >
         Create beautiful
@@ -28,7 +35,7 @@ function Hero() {
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: .3 }}
+        transition={{ delay: 0.3 }}
         className="mt-8 max-w-3xl text-xl leading-8 text-slate-400"
       >
         Generate modern color palettes, lock your favorite colors,
@@ -38,15 +45,11 @@ function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: .5 }}
-        className="mt-12 flex flex-wrap justify-center gap-4"
+        transition={{ delay: 0.5 }}
+        className="mt-12"
       >
-        <Button>
-          🎲 Generate Palette
-        </Button>
-
-        <Button variant="secondary">
-          Learn More
+        <Button onClick={scrollToGenerator}>
+          🎨 Generate Palette
         </Button>
       </motion.div>
 

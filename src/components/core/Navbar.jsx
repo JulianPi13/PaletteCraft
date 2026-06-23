@@ -12,12 +12,6 @@ function Navbar() {
           </h1>
         </div>
 
-        <div className="hidden md:flex items-center gap-10 text-slate-400">
-          <a href="#">Features</a>
-          <a href="#">Generator</a>
-          <a href="#">Docs</a>
-        </div>
-
         <Button variant="secondary">
           GitHub
         </Button>
