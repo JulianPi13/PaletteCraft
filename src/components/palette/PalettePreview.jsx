@@ -1,11 +1,14 @@
-import { useState } from "react";
-import Button from "../ui/Button";
+import { useEffect, useState } from "react";
 import ColorCard from "./ColorCard";
+import Toolbar from "../toolbar/Toolbar";
 import { generatePalette } from "../../utils/generatePalette";
 
 function PalettePreview() {
-
   const [palette, setPalette] = useState(generatePalette());
+
+  function updatePalette(newPalette) {
+    setPalette(newPalette);
+  }
 
   function generateNewPalette() {
     setPalette((current) => generatePalette(current));
@@ -21,31 +24,44 @@ function PalettePreview() {
     );
   }
 
+  useEffect(() => {
+    function handleKeyDown(event) {
+      const tag = event.target.tagName;
+
+      if (
+        event.code === "Space" &&
+        tag !== "INPUT" &&
+        tag !== "TEXTAREA"
+      ) {
+        event.preventDefault();
+        generateNewPalette();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <section className="mx-auto mt-24 max-w-7xl px-8">
 
-      <div className="mb-8 flex items-center justify-between">
-
-        <h2 className="text-3xl font-bold">
-          Your Palette
-        </h2>
-
-        <Button onClick={generateNewPalette}>
-          🎲 Generate
-        </Button>
-
-      </div>
+      <Toolbar
+        palette={palette}
+        onGenerate={generateNewPalette}
+        onImagePalette={updatePalette}
+      />
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
 
         {palette.map((color) => (
-
           <ColorCard
             key={color.id}
             color={color}
             onToggleLock={toggleLock}
           />
-
         ))}
 
       </div>
